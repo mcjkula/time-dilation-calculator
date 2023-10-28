@@ -8,7 +8,7 @@ stack: python 3.10
 
 environment:
   GITHUB_TOKEN:
-    secure: 5k6s6NNAhHMwZHrV72cBcGZTrPHJ5j+A3wdW/DOLsyC3+0vnbwVIZQdc29X1U8f7
+    secure: trQ5xRGwMeIPiaofD3ZaCAyyrCYiiV4MQ2ApGxL0bJ7cOb6bDB9l43WkLl35G+HomLKhwGu7h3fu50heqw+ZimCLL5lb6ZU9AWGr59pQlOEfZW72Fgt/AINGRJEioMx5
 
 install:
   - python -m pip install --upgrade pip
