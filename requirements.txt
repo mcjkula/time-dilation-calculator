@@ -1,3 +1,3 @@
-flet>=0.3.2
-pyinstaller>=5.7.0
-pillow>=10.1.0
+flet
+pyinstaller
+pillow
