@@ -1,1 +1,5 @@
 .venv
+*generated*
+dist/
+build/
+main.spec
