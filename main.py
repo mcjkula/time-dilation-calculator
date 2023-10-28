@@ -1,56 +1,81 @@
-import PySimpleGUI as sg
+import flet as ft
 
-sg.theme('Reddit')
-layout = [[sg.Input(default_text='299792.458', justification='center', key='-INPUT1-', readonly=True),
-           sg.Text('c in km/s', key='-UNIT-')],
-          [sg.Input(default_text='299792.458', size=(22, 1), pad=((5, 0), (0, 0)), justification='center',
-                    key='-INPUT2-', readonly=True),
-           sg.Input(default_text='', size=(22, 1), pad=(3, 0), justification='center', focus=True, key='-INPUT3-'),
-           sg.Spin(('km/s', '% of c', 'm/s', 'km/h'), size=(7, 1), key='-LIST1-')],
-          [sg.Button('Berechnen', size=(39, 1), key='-BUTTON1-')],
-          [sg.Input(justification='center', size=(45, 1), key='-INPUT4-', readonly=True), sg.Text("= t'")],
-          [sg.HorizontalSeparator()],
-          [sg.Input(default_text='0', size=(22, 1), pad=((5, 0), (0, 0)), justification='center',
-                    key='-INPUT5-', readonly=True),
-           sg.Input(default_text='', size=(22, 1), pad=(3, 0), justification='center', key='-INPUT6-'),
-           sg.Text('Jahre')],
-          [sg.Button('Umwandeln', size=(39, 1), key='-BUTTON2-')]
-          ]
+def main(page: ft.Page):
+    page.title = "Time Dilation Calculator"
+    page.window_resizable = False
+    page.window_width = 450
+    page.window_height = 250
 
-window = sg.Window('Zeitdilatationsrechner', layout)
+    const = ft.TextField(label="Speed of Light", text_align=ft.TextAlign.CENTER, width=150, dense=True, value='299792.458')
+    speed = ft.TextField(label="Given Velocity", text_align=ft.TextAlign.CENTER, width=150, dense=True, autofocus=True)
+    units = ft.Dropdown(
+        label="Unit",
+        options=[
+            ft.dropdown.Option("km/s"),
+            ft.dropdown.Option("% of c"),
+            ft.dropdown.Option("m/s"),
+            ft.dropdown.Option("km/h"),
+        ],
+        dense=True,
+        width=100
+    )
 
-while True:
-    event, values = window.read()
+    def lorentz_factor(e):
+        v = float(speed.value) if speed.value else 0.0
+        c = float(const.value)
 
-    if event == '-BUTTON1-':
-        v = values['-INPUT3-']
-        c = values['-INPUT2-']
-        if v.isnumeric():
-            match values['-LIST1-']:
+        if v == 0.0:
+            # TODO
+            page.update()
+            return
 
-                case 'km/s':
-                    output = float(c) / ((float(c) ** 2 - float(v) ** 2) ** 0.5)
-                    window['-INPUT4-'].update(output)
+        match units.value:
+            case "km/s":
+                result = c / ((c**2 - v**2)**0.5)
+            case "% of c":
+                result = c / ((c**2 - ((v / 100) * c)**2)**0.5)
+            case "m/s":
+                result = c / ((c**2 - (v / 1000)**2)**0.5)
+            case "km/h":
+                result = c / ((c**2 - (v / 3600)**2)**0.5)
 
-                case '% of c':
-                    output = float(c) / ((float(c) ** 2 - ((float(v) / 100) * float(c)) ** 2) ** 0.5)
-                    window['-INPUT4-'].update(output)
+        result_t.value = f"{result}"
+        page.update()
 
-                case 'm/s':
-                    output = float(c) / ((float(c) ** 2 - (float(v) / 1000) ** 2) ** 0.5)
-                    window['-INPUT4-'].update(output)
+    calc_time_delta = ft.ElevatedButton(width=100 ,text='Run', on_click=lorentz_factor)
+    result_t = ft.TextField(label="Lorentz-Factor", text_align=ft.TextAlign.CENTER, width=310, dense=True, read_only=True)
 
-                case 'km/h':
-                    output = float(c) / ((float(c) ** 2 - (float(v) / 3600) ** 2) ** 0.5)
-                    window['-INPUT4-'].update(output)
+    time_delta = ft.TextField(label="Dilated Time", text_align=ft.TextAlign.CENTER, width=150, dense=True, read_only=True)
+    years = ft.TextField(label="Proper Time", text_align=ft.TextAlign.CENTER, width=150, dense=True)
 
-    if event == '-BUTTON2-':
-        t = values['-INPUT4-']
-        j = values['-INPUT6-']
-        j_output = round(float(j) / float(t), 4)
-        window['-INPUT5-'].update(j_output)
+    def time_dilation(e):
+        t = float(result_t.value) if result_t.value else 0.0
+        j = float(years.value) if years.value else 0.0
 
-    if event == sg.WINDOW_CLOSED:
-        break
+        if t == 0.0:
+            # TODO
+            page.update()
+            return
 
-window.close()
+        result = round(t * j, 4)
+        time_delta.value = f"{result}"
+        page.update()
+
+    calc_time_diff = ft.ElevatedButton(width=100, text='Run', on_click=time_dilation)
+
+    # Layout
+    layout = ft.Column(
+        [
+            ft.Row([const, speed, units]),
+            ft.Row([result_t, calc_time_delta]),
+            ft.Divider(thickness=2.5),
+            ft.Row([time_delta, years, calc_time_diff]),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+    )
+
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.add(layout)
+    page.update()
+
+ft.app(target=main)
