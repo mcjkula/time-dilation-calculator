@@ -1,15 +1,46 @@
-# Time Dilation Calculator in Python
+<p align="center">
+  <img src="https://cloud.mcjkula.com/index.php/s/d6spHtmo8tKiTtp" alt="Time Dilation Calculator" width="auto" height="auto">
+</p>
 
-A calculator for the time inside and outside of fast moving objects near the speed of light.
+# Time Dilation Calculator
 
----
+This repository contains a Time Dilation Calculator built with `Flet`. It allows users to input a velocity and calculate the lorentz-factor and dilated time based on the given proper time.
 
-Nedeed python packages are:
-- PySimpleGUI
+## Technologies Used
 
-Which can be installed using pip.
+- Framework: [flet](https://github.com/flet-dev/flet) (Flet enables developers to easily build realtime web, mobile and desktop apps in Python).
 
-(Example)
+## Features
+
+### Lorentz Factor Calculation
+- Users can input the velocity of an object and the speed of light to calculate the lorentz-factor.
+- Supports various units of velocity including km/s, % of c, m/s, and km/h.
+
+### Time Dilation Calculation
+- Calculates the dilated time based on the given proper time and the calculated lorentz-factor.
+- Displays the lorentz-factor and dilated time.
+
+## Requirements
+
+To run and use the Time Dilation Calculator, you need the following:
+
+- `flet` framework installed.
+- Python 3.10 (Because of the Match-Case)
+
+## Usage
+
+1. Clone this repository.
+2. Ensure all requirements are met.
+3. Run the script.
+
+```bash
+python main.py
 ```
-pip install PySimpleGUI
-```
+
+## Future Plans (Halted)
+- Implement error handling for invalid input values.
+- Provide additional information on lorentz-factor and time dilation within the app.
+- Include visualizations to better illustrate the concept of time dilation.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. [Maciej Kula](https://github.com/mcjkula).
