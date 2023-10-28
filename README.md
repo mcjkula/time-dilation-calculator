@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cloud.mcjkula.com/index.php/s/d6spHtmo8tKiTtp" alt="Time Dilation Calculator" width="auto" height="auto">
+  <img src="https://cloud.mcjkula.com/index.php/apps/files_sharing/publicpreview/d6spHtmo8tKiTtp?file=/&fileId=86660&x=3600&y=2338&a=true" alt="Time Dilation Calculator" width="auto" height="auto">
 </p>
 
 # Time Dilation Calculator
