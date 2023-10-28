@@ -1,0 +1,66 @@
+image:
+- Visual Studio 2019
+- macOS
+- Ubuntu
+
+skip_branch_with_pr: true
+stack: python 3.10
+
+environment:
+  GITHUB_TOKEN:
+    secure: 5k6s6NNAhHMwZHrV72cBcGZTrPHJ5j+A3wdW/DOLsyC3+0vnbwVIZQdc29X1U8f7
+
+install:
+  - python -m pip install --upgrade pip
+  - "pip install Pillow --only-binary :all:"
+  - pip install -r requirements.txt
+
+
+build_script:
+- flet pack main.py --name tdlc --icon icon.png --product-name TDLC --product-version "1.0.0" --copyright "Copyright (c) 2023 Maciej Kula"
+
+test: off
+
+# Publish artifacts to GitHub Releases on "tag" builds
+deploy:
+  provider: GitHub
+  auth_token: $(GITHUB_TOKEN)
+  on:
+    APPVEYOR_REPO_TAG: true
+
+#   Windows package
+for:
+-
+  matrix:
+    only:
+    - image: Visual Studio 2019
+
+  after_build:
+  - 7z a tdlc-windows.zip %CD%\dist\*.exe
+
+  artifacts:
+  - path: tdlc-windows.zip
+
+#   macOS package
+-
+  matrix:
+    only:
+    - image: macOS
+
+  after_build:
+  - tar -czvf tdlc-macos.tar.gz -C dist tdlc.app
+
+  artifacts:
+  - path: tdlc-macos.tar.gz
+
+#   Linux package
+-
+  matrix:
+    only:
+    - image: Ubuntu
+
+  after_build:
+  - tar -czvf tdlc-linux.tar.gz -C dist tdlc
+
+  artifacts:
+  - path: tdlc-linux.tar.gz
