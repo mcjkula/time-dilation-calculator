@@ -45,10 +45,10 @@ To run and use the Time Dilation Calculator, you need the following:
 python main.py
 ```
 
-## Future Plans (Halted)
+## Future Plans
 - Implement error handling for invalid input values.
 - Provide additional information on lorentz-factor and time dilation within the app.
-- Include visualizations to better illustrate the concept of time dilation.
+- ~~Include visualizations to better illustrate the concept of time dilation.~~ (Done)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. [Maciej Kula](https://github.com/mcjkula).
