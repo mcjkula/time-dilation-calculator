@@ -1,2 +1,6 @@
 flet
 pyinstaller
+numpy
+matplotlib
+Pillow
+imageio
