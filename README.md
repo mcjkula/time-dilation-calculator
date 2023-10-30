@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cloud.mcjkula.com/index.php/apps/files_sharing/publicpreview/d6spHtmo8tKiTtp?file=/&fileId=86660&x=3600&y=2338&a=true" alt="Time Dilation Calculator" width="auto" height="auto">
+  <img src="https://cloud.mcjkula.com/index.php/core/preview?fileId=87204&x=3600&y=2338&a=true" alt="Time Dilation Calculator" width="auto" height="auto">
 </p>
 
 # Time Dilation Calculator
@@ -19,6 +19,14 @@ This repository contains a Time Dilation Calculator built with `Flet`. It allows
 ### Time Dilation Calculation
 - Calculates the dilated time based on the given proper time and the calculated lorentz-factor.
 - Displays the lorentz-factor and dilated time.
+
+### Lorentz Factor Visualization
+- Visualizes the Lorentz Factor using the Phytagoras Theorem.
+- Represents the typical Lorentz Factor/Time Dilation curve in a new way, to better see the current state of dilated time.
+
+<p align="center">
+  <img src="./output_centered.gif">
+</p>
 
 ## Requirements
 
