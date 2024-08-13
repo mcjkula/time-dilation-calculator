@@ -42,7 +42,7 @@ To run and use the Time Dilation Calculator, you need the following:
 3. Run the script.
 
 ```bash
-python3 main.py
+python main.py
 ```
 
 ## Future Plans
